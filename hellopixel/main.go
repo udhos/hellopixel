@@ -1,10 +1,15 @@
 package main
 
 import (
+	"fmt"
+
+	"golang.org/x/image/colornames"
+	"golang.org/x/image/font/basicfont"
+
 	"github.com/faiface/pixel"
 	"github.com/faiface/pixel/imdraw"
 	"github.com/faiface/pixel/pixelgl"
-	"golang.org/x/image/colornames"
+	"github.com/faiface/pixel/text"
 )
 
 func run() {
@@ -18,7 +23,14 @@ func run() {
 		panic(err)
 	}
 
-	win.Clear(colornames.Skyblue)
+	// Text
+	basicAtlas := text.NewAtlas(basicfont.Face7x13, text.ASCII)
+	basicTxt := text.New(pixel.V(10, 550), basicAtlas)
+	basicTxt4 := text.New(pixel.V(10, 500), basicAtlas)
+	basicTxt.Color = colornames.Red
+	basicTxt4.Color = colornames.Green
+	fmt.Fprintln(basicTxt, "Hello, text!")
+	fmt.Fprintln(basicTxt4, "Hello, text!")
 
 	imd := imdraw.New(nil)
 
@@ -37,8 +49,10 @@ func run() {
 	imd.Line(1)
 
 	for !win.Closed() {
-		win.Clear(colornames.Aliceblue)
+		win.Clear(colornames.Darkgray)
 		imd.Draw(win)
+		basicTxt.Draw(win, pixel.IM)
+		basicTxt4.Draw(win, pixel.IM.Scaled(basicTxt4.Orig, 4))
 		win.Update()
 	}
 }
