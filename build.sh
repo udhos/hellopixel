@@ -19,4 +19,6 @@ build() {
 	go install -v "$pkg"
 }
 
+hash shadow || go install golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow
+
 build ./hellopixel
