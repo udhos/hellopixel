@@ -27,10 +27,12 @@ func run() {
 	basicAtlas := text.NewAtlas(basicfont.Face7x13, text.ASCII)
 	basicTxt := text.New(pixel.V(10, 550), basicAtlas)
 	basicTxt4 := text.New(pixel.V(10, 500), basicAtlas)
+	txt := text.New(pixel.V(10, 450), basicAtlas)
 	basicTxt.Color = colornames.Red
 	basicTxt4.Color = colornames.Green
+	txt.Color = colornames.Blue
 	fmt.Fprintln(basicTxt, "Hello, text!")
-	fmt.Fprintln(basicTxt4, "Hello, text!")
+	fmt.Fprintln(basicTxt4, "Type some keys")
 
 	imd := imdraw.New(nil)
 
@@ -49,10 +51,18 @@ func run() {
 	imd.Line(1)
 
 	for !win.Closed() {
+		txt.WriteString(win.Typed())
+		if win.JustPressed(pixelgl.KeyEnter) || win.Repeated(pixelgl.KeyEnter) {
+			txt.WriteRune('\n')
+		}
+
 		win.Clear(colornames.Darkgray)
 		imd.Draw(win)
+
 		basicTxt.Draw(win, pixel.IM)
 		basicTxt4.Draw(win, pixel.IM.Scaled(basicTxt4.Orig, 4))
+		txt.Draw(win, pixel.IM.Scaled(txt.Orig, 2))
+
 		win.Update()
 	}
 }
