@@ -16,11 +16,15 @@ https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64
 
 3. Open Git Bash and build as usual
 
+Recipe:
+
     git clone https://github.com/udhos/hellopixel
     cd hellopixel
     go install ./hellopixel
 
-4. Run
+4. Run 'hellopixel'
+
+You can run it from anywhere (Git Bash, CMD prompt, etc)
 
     hellopixel
 
