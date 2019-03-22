@@ -22,6 +22,7 @@ func run() {
 
 	imd := imdraw.New(nil)
 
+	// Triangle
 	imd.Color = pixel.RGB(1, 0, 0)
 	imd.Push(pixel.V(100, 100))
 	imd.Color = pixel.RGB(0, 1, 0)
@@ -29,6 +30,11 @@ func run() {
 	imd.Color = pixel.RGB(0, 0, 1)
 	imd.Push(pixel.V(400, 500))
 	imd.Polygon(0)
+
+	// Line
+	imd.Color = colornames.Blueviolet
+	imd.Push(pixel.V(0, 0), pixel.V(800, 600))
+	imd.Line(1)
 
 	for !win.Closed() {
 		win.Clear(colornames.Aliceblue)
